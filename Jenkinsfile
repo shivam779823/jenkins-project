@@ -27,8 +27,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhublogin') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
+                            dockerImage.push("latest")
+                            dockerImage.push("${env.BUILD_ID}")
                     }
                 }
             }
