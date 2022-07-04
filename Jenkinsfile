@@ -12,7 +12,8 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/shivam779823/jenkins-project.git'
+        git branch: 'main', url: 'https://github.com/shivam779823/jenkins-project.git'
+       
       }
     }
 
@@ -21,6 +22,7 @@ pipeline {
         script {
           dockerImage = docker.build dockerimagename
         }
+        
       }
     }
 
@@ -38,13 +40,7 @@ pipeline {
     }
 
   
-    stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
-        }
-      }
-    }
+   
 
   }
 
