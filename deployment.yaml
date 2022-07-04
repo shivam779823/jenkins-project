@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: hello_world
+  labels:
+    app: hello_world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello_world
+
+  template:
+    metadata:
+      labels:
+        app: hello_world
+    spec:
+      containers:
+      - name: hello_world
+        image: shiva9921/hello-world-python:latest
+        ports:
+        - containerPort: 5000
+          name: hello_world
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello_service
+  labels:
+    app: hello_world
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "hello-service"
+    port: 5000
+    targetPort: 5000
+  
+  selector:
+    app: hello_world
+  
