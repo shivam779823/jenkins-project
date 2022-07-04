@@ -4,10 +4,10 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'PROJECT-ID'
-        CLUSTER_NAME = 'hello'
-        LOCATION = 'us-central1-a'
-        CREDENTIALS_ID = 'gke'
+        PROJECT_ID = 'qwiklabs-gcp-00-1266fe1cca53'
+        CLUSTER_NAME = 'jenkins-cd'
+        LOCATION = 'us-east1-d'
+        CREDENTIALS_ID = 'qwiklabs-gcp-00-1266fe1cca53'
         dockerImage = "hello-world-python"
     }
     stages {
