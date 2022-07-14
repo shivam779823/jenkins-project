@@ -4,10 +4,10 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'qwiklabs-gcp-00-1266fe1cca53'
+        PROJECT_ID = ' qwiklabs-gcp-04-6967b1341be1'
         CLUSTER_NAME = 'jenkins-cd'
-        LOCATION = 'us-east1-d'
-        CREDENTIALS_ID = 'qwiklabs-gcp-00-1266fe1cca53'
+        LOCATION = 'us-central1-a'
+        CREDENTIALS_ID = 'qwiklabs-gcp-04-6967b1341be1'
         dockerImage = "hello-world-python"
     }
     stages {
@@ -35,8 +35,16 @@ pipeline {
         }        
         stage('Deploy to GKE') {
             steps{
-                sh "sed -i 's/hello-world-python:latest/hello-world-python:${env.BUILD_ID}/g' deployment.yaml" qwiklabs-gcp-04-6967b1341be1
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                sh "sed -i 's/hello-world-python:latest/hello-world-python:${env.BUILD_ID}/g' deployment.yaml"
+                
+                step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: 'deployment.yaml',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
             }
         }
     }    
