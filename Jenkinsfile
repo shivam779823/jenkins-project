@@ -35,7 +35,7 @@ pipeline {
         }        
         stage('Deploy to GKE') {
             steps{
-                sh "sed -i 's/hello-world-python:latest/hello-world-python:${env.BUILD_ID}/g' deployment.yaml"
+                sh "sed -i 's/hello-world-python:latest/hello-world-python:${env.BUILD_ID}/g' deployment.yaml" qwiklabs-gcp-04-6967b1341be1
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
